@@ -39,7 +39,7 @@ const dados = [
 //---------------------------------------------------------------------------
 
 function funcionariosTerceirizados(list) {
-
+  return list.filter(f => f.terceirizado === true);
 }
 
 //---------------------------------------------------------------------------
@@ -50,7 +50,17 @@ function funcionariosTerceirizados(list) {
 //---------------------------------------------------------------------------
 
 function custoTotal(list) {
+  //Sem a função de alta ordem:
 
+  /* let total = 0;
+  for(let i = 0; i < list.length; i++) {
+    total += list[i].valorHora * list[i].horasTrabalhadas;
+  }
+
+  return total.toFixed(2);*/
+
+  //Com a função de alta ordem:
+  return list.map(f => f.horasTrabalhadas * f.valorHora).reduce((x, y) => x + y);
 }
 
 //---------------------------------------------------------------------------
@@ -62,5 +72,5 @@ const terceirizados = funcionariosTerceirizados(dados);
 const custoTerceirizados = custoTotal(terceirizados);
 
 console.log(
-  "Custo total dos funcionarios terceirizados: R$ " + custoTerceirizados
+  "Custo total dos funcionarios terceirizados: R$ " + custoTerceirizados.toFixed(2)
 );
